@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api/users", userRouter);
-
+//listen to port 3435
+app
 
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
