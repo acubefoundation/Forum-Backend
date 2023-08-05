@@ -145,43 +145,6 @@ module.exports = {
         })
     },
 
-    // ...
-    
-    postQuestion: (req, res) => {
-        const { firstName, question, questionDescription } = req.body;
-    
-        // Assuming `register` function registers the user and returns their data
-        register(req.body, (err, registrationResult) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).json({ msg: "database connection err" });
-            }
-    
-            // Assuming `registrationResult` contains the user data, including user_id
-            const userId = registrationResult.user_id;
-    
-            // Construct the data object for posting the question
-            const questionData = {
-                userId,
-                question,
-                questionDescription
-            };
-    
-            // Use the postQuestion function to insert the question into the database
-            postQuestion(questionData, (err, postResult) => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({ msg: "database connection err" });
-                }
-                console.log(postResult);
-    
-                return res.status(200).json({
-                    msg: "question added successfully",
-                    data: postResult,
-                });
-            });
-        });
-    }
-    
+   
     
 }

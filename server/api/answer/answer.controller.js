@@ -4,7 +4,7 @@ const pool = require("../../config/database");
 module.exports={
 // function to insert answer to the answer table
     Answer:(req,res)=>{
-        const {answer,question_id,user_id}=req.body;
+        const {answer,questionId,id}=req.body;
         if(!answer)
       return res.status(400).json({ msg: "Answer should be provided!!" });
       

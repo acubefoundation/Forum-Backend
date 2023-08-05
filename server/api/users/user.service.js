@@ -53,18 +53,5 @@ module.exports = {
             }
         );
     },
-postQuestion: (data, callback) => {
-    // Inserting data to the questions table
-    pool.query(
-        'INSERT INTO question (user_id, question, question_description) VALUES (?, ?, ?)',
-        [data.userId, data.question, data.questionDescription],
-        (err, result) => {
-            if (err) {
-                return callback(err);
-            }
-            return callback(null, result);
-        }
-    );
-}
 
 };

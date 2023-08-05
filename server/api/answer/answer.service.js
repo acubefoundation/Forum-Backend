@@ -5,7 +5,7 @@ module.exports = {
     // sql query to insert answer
     pool.query(
       `INSERT INTO answer(answer,user_id,question_id)VALUES(?,?,?)`,
-      [data.answer, data.user_id, data.question_id],
+      [data.answer, data.id, data.questionId],
       (err, result) => {
         if (err) {
           return callback(err);
