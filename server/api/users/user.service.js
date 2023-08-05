@@ -3,14 +3,9 @@ const pool = require('../../config/database');
 module.exports = {
     //data comes form the user controller
     register: (data, callback) => {
-
-        //inserting data to registration table
-        pool.query(`INSERT INTO registration(user_name,user_email,user_password)VALUES(?,?,?)`,
-            [
-                data.userName,
-                data.email,
-                data.password
-            ],
+        // inserting data to registration table
+        pool.query(`INSERT INTO registration(user_name, user_email, user_password) VALUES (?, ?, ?)`,
+            [data.userName, data.email, data.password],
             (err, result) => {
                 if (err) {
                     return callback(err);
@@ -19,15 +14,11 @@ module.exports = {
             }
         );
     },
+
     profile: (data, callback) => {
-
-        //inserting data to profile table
-        pool.query(`INSERT INTO profile(user_id,first_name,last_name)VALUES(?,?,?)`,
-            [
-                data.userId,
-                data.firstName,
-                data.lastName
-            ],
+        // inserting data to profile table
+        pool.query(`INSERT INTO profile(user_id, first_name, last_name) VALUES (?, ?, ?)`,
+            [data.userId, data.firstName, data.lastName],
             (err, result) => {
                 if (err) {
                     return callback(err);
@@ -36,24 +27,44 @@ module.exports = {
             }
         );
     },
+
     userById: (id, callback) => {
-
-        //getting data from registration and profile tables by joining them
-        pool.query(`SELECT registration.user_id,user_name,user_email,first_name,last_name FROM registration LEFT JOIN profile ON registration.user_id = profile.user_id WHERE registration.user_id = ?`, [id], (err, result) => {
-            if (err) {
-                return callback(err);
+        // getting data from registration and profile tables by joining them
+        pool.query(`SELECT registration.user_id, user_name, user_email, first_name, last_name FROM registration LEFT JOIN profile ON registration.user_id = profile.user_id WHERE registration.user_id = ?`,
+            [id],
+            (err, result) => {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, result[0]);
             }
-            return callback(null, result[0]);
-        })
+        );
     },
-    getUserByEmail: (email, callback) => {
 
-        //getting the user-info by using email
-        pool.query(`SELECT * FROM registration WHERE user_email = ?`, [email], (err, result) => {
+    getUserByEmail: (email, callback) => {
+        // getting the user-info by using email
+        pool.query(`SELECT * FROM registration WHERE user_email = ?`,
+            [email],
+            (err, result) => {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, result[0]);
+            }
+        );
+    },
+postQuestion: (data, callback) => {
+    // Inserting data to the questions table
+    pool.query(
+        'INSERT INTO question (user_id, question, question_description) VALUES (?, ?, ?)',
+        [data.userId, data.question, data.questionDescription],
+        (err, result) => {
             if (err) {
                 return callback(err);
             }
-            return callback(null, result[0]);
-        })
-    }
+            return callback(null, result);
+        }
+    );
 }
+
+};
