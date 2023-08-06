@@ -1,6 +1,6 @@
 //database.js
-require('dotenv').config()
-const mysql = require('mysql2')
+require('dotenv').config();
+const mysql = require('mysql2');
 // const pool = mysql.createConnection('mysql://2hc9eqsqrm3n65k79l2b:pscale_pw_4PktMuQwfBdzTC07eq3Tq8lIBohdqA4qhVeeDf6yPXO@aws.connect.psdb.cloud/evangadi-forum?ssl={"rejectUnauthorized":true}'
 // )
 // console.log('Connected to PlanetScale!')
@@ -55,7 +55,6 @@ const mysql = require('mysql2')
 
 const pool = mysql.createConnection(process.env.DATABASE_URL)
 console.log('Connected to PlanetScale!')
-
 
 
 //   pool.getConnection((err, connection) => {
@@ -126,6 +125,7 @@ pool.query(profile, (err, results, fields) => {
 });
 
 
+
 pool.query(question, (err, results, fields) => {
     if (err) {console.log(err)}else {
         console.log("table question created")
@@ -138,7 +138,6 @@ pool.query(answer, (err, results, fields) => {
         console.log("table answer created")
     }
 });
-
 
 // pool.end()
 
